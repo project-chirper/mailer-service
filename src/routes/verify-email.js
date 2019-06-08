@@ -5,9 +5,9 @@ const sendMail = require('../common/sendMail')
  * @param { email, username, uniqueCode }
  */
 module.exports = async (req, res) => {
-  if (!req.body.email || !req.body.username || !req.body.uniqueCode) res.sendStatus(404)
+  if (!req.body.email || !req.body.username || !req.body.uniqueCode) return res.sendStatus(404)
 
-  let verifyLink = `${process.env.FRONTEND}/verify-email?code=${req.body.uniqueCode}`
+  let verifyLink = `${process.env.FRONTEND}/verify-email/${req.body.uniqueCode}`
 
   await sendMail({
     to: req.body.email,
